@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user! , only: [:new, :create, :edit, :destroy, :find_group_check_permission]
+  before_action :authenticate_user! , only: [:new, :create, :edit, :destroy]
+  before_action :find_group_check_permission, only: [:edit, :update, :destroy]
+
   def index
     @groups = Group.all
   end
@@ -25,7 +27,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    #  @group = Group.find(params[:id])
+    # @group = Group.find(params[:id])
   end
 
   def update
@@ -37,6 +39,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    # @group = Group.find(params[:id])
     @group.destroy
     flash[:alert] = "Group deleted"
     redirect_to groups_path
