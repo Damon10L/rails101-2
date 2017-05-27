@@ -25,6 +25,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    #  @group = Group.find(params[:id])
   end
 
   def update
@@ -49,9 +50,11 @@ end
 
 def find_group_check_permission
   @group = Group.find(params[:id])
+
   if current_user != @group.user
-    redirect_to root_path, alert: "You have no permission"
+    redirect_to root_path, alert: "You have no permission."
   end
 end
+
 
 end
